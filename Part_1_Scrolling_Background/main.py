@@ -3,6 +3,9 @@ from pygame.locals import *
 
 pygame.init()
 
+clock = pygame.time.Clock()
+fps = 60
+
 screen_width = 864
 screen_height = 936
 
@@ -20,6 +23,9 @@ ground_img = pygame.image.load ('img/ground.png')
 
 run = True
 while run:
+
+    clock.tick(fps)
+
 
     #draw background
     screen.blit(bg, (0,0))
