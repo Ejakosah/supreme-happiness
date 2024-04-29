@@ -36,8 +36,29 @@ class Bird(pygame.sprite.Sprite):
 		self.image = self.images[self.index]
 		self.rect = self.image.get_rect()
 		self.rect.center = [x, y]
+		self.vel = 0
+		self.clicked = False
 
 	def update(self):
+
+		#gravity
+		self.vel += 0.5
+		if self.vel >8:
+			self.vel = 8
+		if self.rect.bottom < 768:
+			self.rect.y += int(self.vel)
+
+		#jump
+		if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+			self.clicked = True
+			#-10 means it's going 10 up, remember this for the twist later
+			self.vel = -10
+		if pygame.mouse.get_pressed()[0] == 0:
+			self.clicked = False
+			
+
+
+
 
 		#handle the animation
 		self.counter += 1
