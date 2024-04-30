@@ -1,6 +1,6 @@
 # supreme-happiness
 Git Repo for CIS 1051 spring 2024
 
-https://youtu.be/pBNNwJK99dM My video link.
+https://youtu.be/Cb9W0qlLCIE My video link.
 
 I very much enjoyed being able to create with no restrictions and the reassurance that Professor Rosen provided me with being able to just make and try new things. I learned a lot through the tutorial I used and could follow along relatively well I thought. I was happy to feel like a capable coder understanding a portion of what was being used within the program and was happy to learn about a variety of features that pygame has to offer when I was introduced to something that I didn't know about or needed to be reminded of. I felt scared originally but as I began to code it felt doable and that I was capable. I hope that I can continue to keep trying and persevere whenever I may feel inadequate, inferior, inept, incapable, or just plain stupid and dumb when it comes to Computer Science or anything at all. We are all students and are always learning and able to learn. I am going to keep trying to remember that and know that it is okay to ask for help especially since I am literally learning several new languages and ways of thinking for the first time.
