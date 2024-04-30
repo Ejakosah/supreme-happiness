@@ -45,7 +45,7 @@ def draw_text(text, font, text_col, x, y):
 
 def reset_game():
 	pipe_group.empty()
-	flappy.rect.x = 100
+	flappy.rect.x = screen_width - 150
 	flappy.rect.y = int(screen_height / 2)
 	score = 0
 	return score
@@ -114,7 +114,8 @@ class Pipe(pygame.sprite.Sprite):
 			self.rect.topleft = [x,y + int(pipe_gap / 2)]
 	
 	def update(self):
-		self.rect.x -= scroll_speed
+		#Changes!!!! it was originally -= & I made it +=!!!!
+		self.rect.x += scroll_speed
 		if self.rect.right < 0:
 			self.kill()
 
@@ -145,7 +146,7 @@ class Button():
 bird_group = pygame.sprite.Group()
 pipe_group = pygame.sprite.Group()
 
-flappy = Bird(100, int(screen_height / 2))
+flappy = Bird(screen_width - 150, int(screen_height / 2))
 
 bird_group.add(flappy)
 
@@ -171,12 +172,12 @@ while run:
 
 	#check the score
 	if len(pipe_group) > 0:
-		if bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.left\
-			and bird_group.sprites()[0].rect.right < pipe_group.sprites()[0].rect.right\
+		if bird_group.sprites()[0].rect.right < pipe_group.sprites()[0].rect.right\
+			and bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.left\
 			and pass_pipe == False:
 			pass_pipe = True
 		if pass_pipe == True:
-			if bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.right:
+			if bird_group.sprites()[0].rect.right < pipe_group.sprites()[0].rect.left:
 				score += 1
 				pass_pipe = False
 
@@ -199,14 +200,16 @@ while run:
 		time_now = pygame.time.get_ticks()
 		if time_now - last_pipe > pipe_frequency:
 			pipe_height = random.randint(-100,100)
-			btm_pipe = Pipe(screen_width, int(screen_height / 2) + pipe_height, -1)
-			top_pipe = Pipe(screen_width, int(screen_height / 2) + pipe_height, 1)
+			#Changes!!!! it was originally set as screen_width & I changed it to 0!!!!
+			btm_pipe = Pipe(0, int(screen_height / 2) + pipe_height, -1)
+			top_pipe = Pipe(0, int(screen_height / 2) + pipe_height, 1)
 			pipe_group.add(btm_pipe)
 			pipe_group.add(top_pipe)
 			last_pipe = time_now
 
-		#draw and scroll the ground
-		ground_scroll -= scroll_speed
+		#draw and scroll the ground. 
+  		#Changes!!!! it was originally -= & I made it +=!!!!
+		ground_scroll += scroll_speed
 		if abs(ground_scroll) > 35:
 			ground_scroll = 0
 			
