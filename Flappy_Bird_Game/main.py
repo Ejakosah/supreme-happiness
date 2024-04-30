@@ -172,14 +172,14 @@ while run:
 
 	#check the score
 	if len(pipe_group) > 0:
-		if bird_group.sprites()[0].rect.right < pipe_group.sprites()[0].rect.right\
-			and bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.left\
-			and pass_pipe == False:
-			pass_pipe = True
-		if pass_pipe == True:
-			if bird_group.sprites()[0].rect.right < pipe_group.sprites()[0].rect.left:
-				score += 1
-				pass_pipe = False
+			if bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.left\
+				and bird_group.sprites()[0].rect.right < pipe_group.sprites()[0].rect.right\
+				and pass_pipe == False:
+				pass_pipe = True
+			if pass_pipe == True:
+				if bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.right:
+					score += 1
+					pass_pipe = False
 
 
 	draw_text(str(score), font, white, int(screen_width / 2), 20)
