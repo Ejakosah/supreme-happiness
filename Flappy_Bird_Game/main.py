@@ -15,6 +15,11 @@ screen_height = 936
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Flappy Bird')
 
+#define font
+font = pygame.font.SysFont('Bauhaus 93', 60)
+
+#define font color
+white = (255,255,255)
 
 #define game variables
 ground_scroll = 0
@@ -31,6 +36,9 @@ pass_pipe = False
 bg = pygame.image.load('supreme-happiness/img/bg.png')
 ground_img = pygame.image.load('supreme-happiness/img/ground.png')
 
+def draw_text(text, font, text_col, x, y):
+	img = font.render(text, True, text_col)
+	screen.blit(img, (x,y))
 
 class Bird(pygame.sprite.Sprite):
 	def __init__(self, x, y):
@@ -121,16 +129,27 @@ while run:
 	bird_group.update()
 	pipe_group.draw(screen)
 
-
 	#draw the ground
 	screen.blit(ground_img, (ground_scroll, 768))
 
 	#check the score
 	if len(pipe_group) > 0:
+		if bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.left\
+			and bird_group.sprites()[0].rect.right < pipe_group.sprites()[0].rect.right\
+			and pass_pipe == False:
+			pass_pipe = True
+		if pass_pipe == True:
+			if bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.right:
+				score += 1
+				pass_pipe = False
+
+
+	draw_text(str(score), font, white, int(screen_width / 2), 20)
 
 	#look for collision
 	if pygame.sprite.groupcollide(bird_group, pipe_group, False, False) or flappy.rect.top < 0:
 		game_over = True
+
 	#check if bird has hit the ground
 	if flappy.rect.bottom >= 768:
 		game_over = True
