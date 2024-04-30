@@ -1,7 +1,7 @@
-from typing import Any
+#I used this FlappyBird tutorial https://youtube.com/playlist?list=PLjcN1EyupaQkz5Olxzwvo1OzDNaNLGWoJ&si=urw6d_c87uWE3T5g
+
 import pygame
 from pygame.locals import *
-from pygame.sprite import Group
 import random
 
 pygame.init()
@@ -41,6 +41,15 @@ button_img = pygame.image.load('supreme-happiness/img/restart.png')
 def draw_text(text, font, text_col, x, y):
 	img = font.render(text, True, text_col)
 	screen.blit(img, (x,y))
+
+
+def reset_game():
+	pipe_group.empty()
+	flappy.rect.x = 100
+	flappy.rect.y = int(screen_height / 2)
+	score = 0
+	return score
+
 
 class Bird(pygame.sprite.Sprite):
 	def __init__(self, x, y):
@@ -205,8 +214,10 @@ while run:
 
 	#check for game over and reset
 	if game_over == True:
-		button.draw()
-		
+		if button.draw() == True:
+			game_over = False
+			score = reset_game()
+
 		#event handler 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
